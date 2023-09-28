@@ -13,13 +13,14 @@ public class Enemy : MonoBehaviour
     public int maxHeath ;
     private int currentHeath;
     private int die_coldown=0;
+    public AudioSource sound_hit;
     // Start is called before the first frame update
     void Start()
     {
          currentHeath = maxHeath;  
          player=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
          playerExp=GameObject.FindGameObjectWithTag("Player").GetComponent<playerExp>();
-
+        sound_hit = GameObject.Find("sound_hit").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,6 +34,7 @@ public class Enemy : MonoBehaviour
         currentHeath -= damage;
         if(currentHeath>0){
         _animator.SetTrigger("hurt");
+            sound_hit.Play();
            transform.position=new Vector3(transform.position.x +0.1f,transform.position.y +0.2f);
             Hit_Slash();
         

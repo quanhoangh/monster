@@ -16,13 +16,15 @@ public class hp_boss : MonoBehaviour
     private int currentHeath;
     private int die_coldown=0;
     public GameObject Menu_win;
-
+    public AudioSource sound_hit;
     // Start is called before the first frame update
     void Start()
     {
         currentHeath = maxHeath;
         hp_bar.SetMaxHeath(maxHeath);  
         Menu_win.SetActive(false);
+        sound_hit = GameObject.Find("sound_hit").GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -40,6 +42,7 @@ public class hp_boss : MonoBehaviour
         currentHeath -= damage;
         if(currentHeath>0){
         // _animator.SetTrigger("hurt");
+        sound_hit.Play();
         player=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         Hit_Slash();
 

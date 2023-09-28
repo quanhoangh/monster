@@ -28,10 +28,7 @@ public class HeathPlayer : MonoBehaviour
     void Update()
     {
         hp_Text.text=""+ maxHeath +"/" + currenHeath;
-          if(Input.GetKeyDown(KeyCode.T)){
-         currenHeath -=5000;   
          
-        }
         heathBar.SetMaxHeath(maxHeath); 
         heathBar.SetHeath(currenHeath);
     }

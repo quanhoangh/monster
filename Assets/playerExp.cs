@@ -34,17 +34,15 @@ public class playerExp : MonoBehaviour
         }
     public void level_up(){
          expLevel.text="" + level;
-        if(Input.GetKeyDown(KeyCode.Q)){
-            currenExp +=2000;
-            exp.SetExp(currenExp);
-        }
+       
         if(currenExp>=maxexp){
             currenExp=currenExp-maxexp;
             exp.SetMaxExp(maxexp); 
             exp.SetExp(currenExp);
             level ++;
-            dame.attackdame *= 2;
-            hp.maxHeath =hp.maxHeath +5000;
+            dame.attackdame += 10;
+            hp.maxHeath =hp.maxHeath +500;
+            hp.currenHeath += 500;
             if(level>=3){
                 maxexp +=maxexp* 0.3f;
             }else if(level>=10){

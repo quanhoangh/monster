@@ -37,7 +37,7 @@ public class playercontroll : MonoBehaviour
     public bool InputReceived;
     public static playercontroll instance;
     public bool isAttk_combo=false;
-
+    public AudioSource sword;
     private void Awake() {
         instance=this;
     }
@@ -64,7 +64,8 @@ public class playercontroll : MonoBehaviour
         isground();
        
         if(Input.GetKey(KeyCode.S)&&Input.GetKeyDown(KeyCode.U)&&grounded==true){
-            if(Time.time>colldown_attk){          
+            if(Time.time>colldown_attk){
+                sword.Play();
                 animator.SetTrigger("dash_attk");
                 GetComponent<Playerskill>().skill_dash();
                 colldown_attk =Time.time +colldown;
@@ -74,6 +75,7 @@ public class playercontroll : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.J)&&Input.GetKey(KeyCode.S)&&grounded==true){
             if(Time.time>colldown_attk){
+                sword.Play();
                 animator.SetTrigger("attk_3");
                 StartCoroutine(atkk_up());
                 GetComponent<Playerskill>().skill_up();
@@ -83,6 +85,7 @@ public class playercontroll : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.U)&&grounded==true){
             if(Time.time>colldown_attk){
+                sword.Play();
                 GetComponent<Playerskill>().skill_2();
                 StartCoroutine(atkkCheck());
                 animator.SetTrigger("dash_attk");
@@ -92,7 +95,8 @@ public class playercontroll : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.I)){
             if(Time.time>colldown_attk){
-            GetComponent<Playerskill>().skill_3();
+                sword.Play();
+                GetComponent<Playerskill>().skill_3();
             StartCoroutine(atkkCheck_3());
             animator.SetTrigger("attk_4");
             colldown_attk=Time.time +colldown;
@@ -104,7 +108,8 @@ public class playercontroll : MonoBehaviour
             ghost.makeGhost=true;
         }
         
-        if(Input.GetKeyDown(KeyCode.L)&&canDash){
+        if(Input.GetKeyDown(KeyCode.L)&&canDash|| Input.GetKeyDown(KeyCode.Q) && canDash)
+        {
             StartCoroutine(Dash()); 
         }
       
@@ -112,14 +117,15 @@ public class playercontroll : MonoBehaviour
         
        
            if(Time.time>colldown_attk){
-                  isAttk_combo=true;
+                sword.Play();
+                isAttk_combo =true;
                 colldown_attk=Time.time +colldown;
             }
 
         }
     if(GetComponent<ladder>().isClimbing){
         animator.SetTrigger("ladder");
-    } else if(Input.GetButtonDown("Jump")||Input.GetKeyDown(KeyCode.K)||Input.GetKeyDown(KeyCode.W)){ 
+    } else if(Input.GetButtonDown("Jump")||Input.GetKeyDown(KeyCode.W)){ 
             jump();
         }
     }
